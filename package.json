@@ -1,0 +1,19 @@
+{
+  "name": "rn-monorepo",
+  "version": "1.0.0",
+  "description": "React Native monorepo with shared packages",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "yarn workspaces foreach -pt run dev",
+    "build": "yarn workspaces foreach -pt run build",
+    "clean": "yarn workspaces foreach -pt run clean"
+  },
+  "packageManager": "yarn@4.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "yarn": ">=4.0.0"
+  }
+}

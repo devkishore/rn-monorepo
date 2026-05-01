@@ -1,0 +1,27 @@
+{
+  "name": "comify",
+  "version": "0.0.1",
+  "description": "Comify - React Native app consuming common package",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "dev": "react-native start",
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@rn-monorepo/common": "workspace:*",
+    "react": "^18.2.0",
+    "react-native": "^0.73.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/react": "^18.2.0",
+    "@types/react-native": "^0.73.0",
+    "jest": "^29.5.0",
+    "typescript": "^5.3.0"
+  }
+}
