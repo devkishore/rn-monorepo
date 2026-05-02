@@ -162,10 +162,10 @@ Your project must have these configuration files:
   ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/.prettierrc))
 
 - ✔️ [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) - TypeScript compiler settings  
-  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/tsconfig.json))
+  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/apps/comify/tsconfig.json))
 
 - ✔️ [`jest.config.js`](https://jestjs.io/docs/configuration) - Jest test configuration  
-  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/jest.config.js))
+  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/packages/api/jest.config.js))
 
 ---
 
