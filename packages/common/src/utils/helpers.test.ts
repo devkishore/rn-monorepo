@@ -1,4 +1,4 @@
-import { formatString, getInitials, delay } from '../utils/helpers';
+import { formatString, getInitials, delay } from './helpers';
 
 describe('Helper Functions', () => {
   describe('formatString', () => {
