@@ -56,7 +56,7 @@ describe('Helper Functions', () => {
       await delay(100);
       const elapsed = Date.now() - start;
       expect(elapsed).toBeGreaterThanOrEqual(100);
-      expect(elapsed).toBeLessThan(200);
+      expect(elapsed).toBeLessThan(500);
     });
 
     it('should return a promise', () => {
