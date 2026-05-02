@@ -1,4 +1,4 @@
-name: High Priority Checks
+name: High CI
 
 on:
   push:
@@ -38,7 +38,7 @@ jobs:
           fi
 
   typecheck:
-    name: '[HIGH] TypeScript Type Checking'
+    name: 'TypeScript Type Checking'
     runs-on: ${{ inputs.runs-on }}
     needs: setup
     steps:
@@ -61,7 +61,7 @@ jobs:
         run: yarn workspaces run tsc --noEmit
 
   lint:
-    name: '[HIGH] ESLint Code Quality'
+    name: 'ESLint Code Quality'
     runs-on: ${{ inputs.runs-on }}
     needs: setup
     steps:
@@ -84,7 +84,7 @@ jobs:
         run: yarn lint
 
   format:
-    name: '[HIGH] Prettier Code Formatting'
+    name: 'Prettier Code Formatting'
     runs-on: ${{ inputs.runs-on }}
     needs: setup
     steps:
@@ -107,7 +107,7 @@ jobs:
         run: yarn format --check
 
   build:
-    name: '[HIGH] Build & Compile'
+    name: 'Build & Compile'
     runs-on: ${{ inputs.runs-on }}
     needs: setup
     strategy:
@@ -135,7 +135,7 @@ jobs:
         run: yarn build
 
   test:
-    name: '[HIGH] Unit Tests'
+    name: 'Unit Tests'
     runs-on: ${{ inputs.runs-on }}
     needs: setup
     strategy:
@@ -163,7 +163,7 @@ jobs:
         run: yarn test
 
   security:
-    name: '[HIGH] Security Audit'
+    name: 'Security Audit'
     runs-on: ${{ inputs.runs-on }}
     needs: setup
     steps:

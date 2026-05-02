@@ -1,4 +1,4 @@
-name: Reusable Medium Priority Checks
+name: Medium CI
 
 on:
   workflow_call:
@@ -14,7 +14,7 @@ env:
 
 jobs:
   coverage:
-    name: '[MEDIUM] Test Coverage Analysis'
+    name: 'Test Coverage Analysis'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -44,7 +44,7 @@ jobs:
           if-no-files-found: ignore
 
   dependency-check:
-    name: '[MEDIUM] Check Dependencies'
+    name: 'Check Dependencies'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -66,7 +66,7 @@ jobs:
         run: yarn outdated || true
 
   performance:
-    name: '[MEDIUM] Performance Check'
+    name: 'Performance Check'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -90,7 +90,7 @@ jobs:
           du -sh packages/*/dist
 
   documentation:
-    name: '[MEDIUM] Documentation Check'
+    name: 'Documentation Check'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code

@@ -1,4 +1,4 @@
-name: Reusable Low Priority Checks
+name: Low CI
 
 on:
   workflow_call:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   bundle-analysis:
-    name: '[LOW] Bundle Size Analysis'
+    name: 'Bundle Size Analysis'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -40,7 +40,7 @@ jobs:
           done
 
   unused-dependencies:
-    name: '[LOW] Unused Dependencies'
+    name: 'Unused Dependencies'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -63,7 +63,7 @@ jobs:
         continue-on-error: true
 
   deprecated-apis:
-    name: '[LOW] Deprecated APIs Check'
+    name: 'Deprecated APIs Check'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -75,7 +75,7 @@ jobs:
           grep -r "componentWillMount\|componentWillReceiveProps\|UNSAFE_" packages/*/src || echo "No deprecated lifecycle methods found"
 
   code-metrics:
-    name: '[LOW] Code Metrics'
+    name: 'Code Metrics'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code

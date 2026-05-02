@@ -1,4 +1,4 @@
-name: Medium Priority Checks
+name: Medium CI
 
 on:
   push:
@@ -20,7 +20,7 @@ env:
 
 jobs:
   coverage:
-    name: '[MEDIUM] Test Coverage Analysis'
+    name: 'Test Coverage Analysis'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -62,7 +62,7 @@ jobs:
             })
 
   dependency-check:
-    name: '[MEDIUM] Check Dependencies'
+    name: 'Check Dependencies'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -87,7 +87,7 @@ jobs:
         run: yarn list --pattern "^" | head -20 || true
 
   integration-tests:
-    name: Integration Tests
+    name: 'Integration Tests'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -110,7 +110,7 @@ jobs:
         continue-on-error: true
 
   performance:
-    name: '[MEDIUM] Performance Check'
+    name: 'Performance Check'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -135,7 +135,7 @@ jobs:
           du -sh packages/*/dist
 
   documentation:
-    name: '[MEDIUM] Documentation Check'
+    name: 'Documentation Check'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code

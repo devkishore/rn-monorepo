@@ -1,4 +1,4 @@
-name: Low Priority Checks
+name: Low CI
 
 on:
   schedule:
@@ -17,7 +17,7 @@ env:
 
 jobs:
   e2e-tests:
-    name: '[LOW] E2E Tests'
+    name: 'E2E Tests'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -40,7 +40,7 @@ jobs:
         continue-on-error: true
 
   accessibility:
-    name: '[LOW] Accessibility Audit'
+    name: 'Accessibility Audit'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -61,7 +61,7 @@ jobs:
           echo "- Verify color contrast ratios"
 
   secrets-scan:
-    name: '[LOW] Secrets Detection'
+    name: 'Secrets Detection'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -76,7 +76,7 @@ jobs:
           extra_args: --debug --only-verified
 
   bundle-analysis:
-    name: '[LOW] Bundle Size Analysis'
+    name: 'Bundle Size Analysis'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -105,7 +105,7 @@ jobs:
           done
 
   unused-dependencies:
-    name: '[LOW] Unused Dependencies'
+    name: 'Unused Dependencies'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -128,7 +128,7 @@ jobs:
         continue-on-error: true
 
   deprecated-apis:
-    name: '[LOW] Deprecated APIs Check'
+    name: 'Deprecated APIs Check'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -150,7 +150,7 @@ jobs:
           echo "Check completed"
 
   license-check:
-    name: '[LOW] License Compliance'
+    name: 'License Compliance'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -173,7 +173,7 @@ jobs:
         continue-on-error: true
 
   code-metrics:
-    name: '[LOW] Code Metrics'
+    name: 'Code Metrics'
     runs-on: ${{ inputs.runs-on }}
     steps:
       - name: Checkout code
@@ -192,7 +192,7 @@ jobs:
           echo "Total Lines: $(find packages/*/src -name "*.ts" -o -name "*.tsx" | xargs wc -l | tail -1)"
 
   health-report:
-    name: '[LOW] Project Health Report'
+    name: 'Project Health Report'
     runs-on: ${{ inputs.runs-on }}
     if: always()
     steps:
