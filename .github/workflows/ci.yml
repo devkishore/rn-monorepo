@@ -58,7 +58,7 @@ jobs:
   build-and-test:
     name: Build & Test (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
-    needs: [setup, lint]
+    needs: setup
     strategy:
       matrix:
         node-version: ${{ fromJson(needs.setup.outputs.node-versions) }}
