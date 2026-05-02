@@ -103,7 +103,7 @@ describe('useAsync', () => {
       await expect(
         act(async () => {
           return result.current.execute();
-        }),
+        })
       ).rejects.toThrow('Failed');
     });
   });

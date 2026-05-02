@@ -24,19 +24,14 @@ describe('AsyncStorageManager', () => {
       const obj = { id: 1, name: 'test' };
       await AsyncStorageManager.setItem('key', obj);
 
-      expect(mockedAsyncStorage.setItem).toHaveBeenCalledWith(
-        'key',
-        JSON.stringify(obj),
-      );
+      expect(mockedAsyncStorage.setItem).toHaveBeenCalledWith('key', JSON.stringify(obj));
     });
 
     it('should handle errors', async () => {
       const error = new Error('Storage error');
       mockedAsyncStorage.setItem.mockRejectedValue(error);
 
-      await expect(
-        AsyncStorageManager.setItem('key', 'value'),
-      ).rejects.toThrow('Storage error');
+      await expect(AsyncStorageManager.setItem('key', 'value')).rejects.toThrow('Storage error');
     });
   });
 
@@ -70,9 +65,7 @@ describe('AsyncStorageManager', () => {
       const error = new Error('Storage error');
       mockedAsyncStorage.getItem.mockRejectedValue(error);
 
-      await expect(AsyncStorageManager.getItem('key')).rejects.toThrow(
-        'Storage error',
-      );
+      await expect(AsyncStorageManager.getItem('key')).rejects.toThrow('Storage error');
     });
   });
 
@@ -89,9 +82,7 @@ describe('AsyncStorageManager', () => {
       const error = new Error('Storage error');
       mockedAsyncStorage.removeItem.mockRejectedValue(error);
 
-      await expect(AsyncStorageManager.removeItem('key')).rejects.toThrow(
-        'Storage error',
-      );
+      await expect(AsyncStorageManager.removeItem('key')).rejects.toThrow('Storage error');
     });
   });
 
@@ -108,9 +99,7 @@ describe('AsyncStorageManager', () => {
       const error = new Error('Storage error');
       mockedAsyncStorage.clear.mockRejectedValue(error);
 
-      await expect(AsyncStorageManager.clear()).rejects.toThrow(
-        'Storage error',
-      );
+      await expect(AsyncStorageManager.clear()).rejects.toThrow('Storage error');
     });
   });
 
@@ -136,9 +125,7 @@ describe('AsyncStorageManager', () => {
       const error = new Error('Storage error');
       mockedAsyncStorage.getAllKeys.mockRejectedValue(error);
 
-      await expect(AsyncStorageManager.getAllKeys()).rejects.toThrow(
-        'Storage error',
-      );
+      await expect(AsyncStorageManager.getAllKeys()).rejects.toThrow('Storage error');
     });
   });
 
@@ -176,9 +163,7 @@ describe('AsyncStorageManager', () => {
       const error = new Error('Storage error');
       mockedAsyncStorage.multiGet.mockRejectedValue(error);
 
-      await expect(
-        AsyncStorageManager.multiGet(['key1', 'key2']),
-      ).rejects.toThrow('Storage error');
+      await expect(AsyncStorageManager.multiGet(['key1', 'key2'])).rejects.toThrow('Storage error');
     });
   });
 });

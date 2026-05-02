@@ -21,7 +21,7 @@ import { apiClient } from '@rn-monorepo/api';
 export const UserProfile = () => {
   const { status, data, error, execute } = useAsync(
     () => apiClient.get('/profile'),
-    true, // immediate execution
+    true // immediate execution
   );
 
   if (status === 'pending') return <Text>Loading...</Text>;
@@ -33,12 +33,14 @@ export const UserProfile = () => {
 ```
 
 **State:**
+
 - `status: 'idle' | 'pending' | 'success' | 'error'` - Current state
 - `data: T | null` - Success response data
 - `error: Error | null` - Error object if failed
 - `execute: () => Promise<T>` - Manual trigger function
 
 **Parameters:**
+
 - `asyncFunction: () => Promise<T>` - Async function to execute
 - `immediate: boolean` - Execute immediately on mount (default: true)
 
@@ -61,21 +63,17 @@ export const SearchScreen = () => {
     }
   }, [debouncedSearchTerm]);
 
-  return (
-    <TextInput
-      placeholder="Search..."
-      value={searchTerm}
-      onChangeText={setSearchTerm}
-    />
-  );
+  return <TextInput placeholder="Search..." value={searchTerm} onChangeText={setSearchTerm} />;
 };
 ```
 
 **Parameters:**
+
 - `value: T` - Value to debounce
 - `delay: number` - Debounce delay in milliseconds (default: 500)
 
 **Returns:**
+
 - `debouncedValue: T` - Debounced value
 
 ## 💡 Common Patterns
@@ -91,7 +89,7 @@ const { status, data } = useAsync(() => apiClient.get('/items'), true);
 ```tsx
 const { status, data, execute } = useAsync(
   () => apiClient.post('/action', payload),
-  false, // Don't execute immediately
+  false // Don't execute immediately
 );
 
 return <Button title="Submit" onPress={execute} />;
@@ -127,9 +125,7 @@ interface SearchResult {
   title: string;
 }
 
-const { data: results } = useAsync<SearchResult[]>(
-  () => apiClient.get('/search'),
-);
+const { data: results } = useAsync<SearchResult[]>(() => apiClient.get('/search'));
 ```
 
 ## 🔧 Build

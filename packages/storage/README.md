@@ -90,10 +90,7 @@ interface StoredData {
   settings?: SettingsData;
 }
 
-const data = await AsyncStorageManager.multiGet<StoredData>([
-  'user',
-  'settings',
-]);
+const data = await AsyncStorageManager.multiGet<StoredData>(['user', 'settings']);
 
 console.log(data.user);
 console.log(data.settings);
@@ -134,7 +131,7 @@ interface AppSettings {
 await AsyncStorageManager.setItem('settings', settings);
 
 // Load settings with defaults
-const settings = await AsyncStorageManager.getItem<AppSettings>('settings') || {
+const settings = (await AsyncStorageManager.getItem<AppSettings>('settings')) || {
   theme: 'light',
   language: 'en',
   notifications: true,

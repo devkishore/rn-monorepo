@@ -5,6 +5,7 @@ Example React Native application demonstrating the usage of shared packages from
 ## 📱 About
 
 Comify is a sample React Native app that showcases how to use packages from `@rn-monorepo`:
+
 - Shared components from `@rn-monorepo/common`
 - API utilities from `@rn-monorepo/api`
 - Custom hooks from `@rn-monorepo/hooks`

@@ -103,7 +103,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     // Handle error
     return Promise.reject(error);
-  },
+  }
 );
 ```
 

@@ -18,15 +18,12 @@ Reusable button component with variant support.
 import { Button } from '@rn-monorepo/common';
 
 export const MyScreen = () => (
-  <Button
-    title="Press me"
-    onPress={() => console.log('Pressed!')}
-    variant="primary"
-  />
+  <Button title="Press me" onPress={() => console.log('Pressed!')} variant="primary" />
 );
 ```
 
 **Props:**
+
 - `title: string` - Button label
 - `onPress: () => void` - Callback when pressed
 - `variant?: 'primary' | 'secondary'` - Button style
@@ -53,6 +50,7 @@ const styles = StyleSheet.create({
 ```
 
 **Available Colors:**
+
 - `primary` - Primary brand color
 - `primaryLight` - Light variant of primary
 - `white` - White
@@ -80,8 +78,8 @@ Extracts initials from a name string.
 ```tsx
 import { getInitials } from '@rn-monorepo/common';
 
-getInitials('John Doe');           // Returns: 'JD'
-getInitials('John Michael Doe');   // Returns: 'JMD'
+getInitials('John Doe'); // Returns: 'JD'
+getInitials('John Michael Doe'); // Returns: 'JMD'
 ```
 
 ### delay

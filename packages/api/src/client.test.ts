@@ -27,7 +27,7 @@ describe('HttpClient', () => {
         expect.objectContaining({
           baseURL: 'https://api.example.com',
           timeout: 10000,
-        }),
+        })
       );
     });
 
@@ -119,9 +119,7 @@ describe('HttpClient', () => {
       const token = 'test-token-123';
       client.setAuthToken(token);
 
-      expect(mockInstance.defaults.headers.common['Authorization']).toBe(
-        `Bearer ${token}`,
-      );
+      expect(mockInstance.defaults.headers.common['Authorization']).toBe(`Bearer ${token}`);
     });
 
     it('should return the axios instance', () => {
