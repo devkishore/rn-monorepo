@@ -2,10 +2,6 @@ name: High CI
 
 on:
   workflow_call:
-    secrets:
-      PAT_TOKEN:
-        description: 'GitHub PAT token for accessing private repos'
-        required: false
 
 permissions:
   contents: read
