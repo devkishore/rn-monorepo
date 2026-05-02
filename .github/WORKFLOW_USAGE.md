@@ -19,9 +19,157 @@ Complete documentation for automated quality checks in React Native projects.
 
 Just push code - workflows run automatically! ✅
 
-### For other projects
+---
 
-**Option A: Reference from this repo (Recommended - No copying)**
+## 📋 What Runs?
+
+Every push/PR triggers these checks:
+
+| Check           | What                    | Pass/Fail   |
+| --------------- | ----------------------- | ----------- |
+| 🔍 **Lint**     | ESLint code quality     | ✅ Required |
+| 📝 **Format**   | Prettier code style     | ✅ Required |
+| 🏗️ **Build**    | TypeScript compilation  | ✅ Required |
+| ✅ **Tests**    | Jest (90% coverage min) | ✅ Required |
+| 🔐 **Security** | Dependency audit        | ⚠️ Warning  |
+
+**Execution time:** ~15-20 minutes on first run, ~5-10 min cached
+
+---
+
+## 🌐 For Other Projects
+
+Before proceeding, ensure your project meets all the requirements below:
+
+### ✅ Prerequisites & Requirements
+
+Your project must meet these requirements before using workflows:
+
+#### 1. System Requirements
+
+- ✔️ **Node.js**: 18.x or higher
+- ✔️ **Yarn**: 1.22.22 or higher (use `yarn --version` to check)
+- ✔️ **Git**: Initialized repository with remote configured
+
+#### 2. Installation
+
+```bash
+# Check Node.js version
+node --version  # Should be >= 18.0.0
+
+# Install/Update Yarn globally
+npm install -g yarn@1.22.22
+
+# Verify Yarn
+yarn --version  # Should be >= 1.22.22
+
+# Install project dependencies
+yarn install
+```
+
+#### 3. Package.json Configuration
+
+Your `package.json` must include these sections:
+
+##### Scripts
+
+```json
+{
+  "scripts": {
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
+    "build": "tsc",
+    "test": "jest",
+    "fix": "eslint . --ext .ts,.tsx --fix && prettier --write ."
+  }
+}
+```
+
+##### DevDependencies
+
+Ensure your `package.json` includes these required packages:
+
+```json
+{
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "@types/react": "^19.2.0",
+    "@types/react-test-renderer": "^19.1.0",
+    "eslint": "^8.19.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "jest": "^29.6.3",
+    "prettier": "^2.8.8",
+    "ts-jest": "^29.1.5",
+    "typescript": "^5.8.3"
+  }
+}
+```
+
+##### Engine Requirements
+
+Set minimum versions in `package.json`:
+
+```json
+{
+  "engines": {
+    "node": ">= 18.0.0",
+    "yarn": ">= 1.22.0"
+  }
+}
+```
+
+**Important:** Always run `yarn install` after updating `package.json` to ensure all dependencies are installed.
+
+#### 4. Git Attributes for Line Endings
+
+Create a `.gitattributes` file in your project root to prevent line ending conflicts between Windows (CRLF) and Linux/Mac (LF):
+
+```
+# Auto detect text files and normalize line endings to LF
+* text=auto eol=lf
+
+# Source code
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+
+# Config files
+.eslintrc text eol=lf
+.prettierrc text eol=lf
+tsconfig.json text eol=lf
+jest.config.js text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+```
+
+**Why this matters:** CI runs on Linux (LF line endings), but Windows uses CRLF. Without `.gitattributes`, Prettier will format files differently in CI than locally, causing unexpected failures.
+
+#### 5. Configuration Files
+
+Your project must have these configuration files:
+
+- ✔️ [`.eslintrc.json`](https://eslint.org/docs/latest/use/configure/) - ESLint rules for code quality  
+  ([Example](https://github.com/fooliscool/rn-comify/blob/main/.eslintrc.json))
+
+- ✔️ [`.prettierrc`](https://prettier.io/docs/en/configuration.html) - Prettier formatting rules  
+  ([Example](https://github.com/fooliscool/rn-comify/blob/main/.prettierrc))
+
+- ✔️ [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) - TypeScript compiler settings  
+  ([Example](https://github.com/fooliscool/rn-comify/blob/main/tsconfig.json))
+
+- ✔️ [`jest.config.js`](https://jestjs.io/docs/configuration) - Jest test configuration  
+  ([Example](https://github.com/fooliscool/rn-comify/blob/main/jest.config.js))
+
+---
+
+### Setup Options
 
 Create `.github/workflows/ci.yml`:
 
@@ -118,44 +266,159 @@ Every push/PR triggers these checks:
 
 ---
 
-## ✅ Requirements
+## ✅ Prerequisites & Requirements
 
-Before using workflows, ensure you have:
+Before using workflows, ensure your project meets all these requirements:
 
-- ✔️ Node.js 18+ installed
-- ✔️ Yarn 1.22.22+ as package manager
-- ✔️ `package.json` with scripts:
-  ```json
-  {
-    "scripts": {
-      "lint": "eslint . --ext .ts,.tsx",
-      "format": "prettier --write '**/*.{ts,tsx,json,md}'",
-      "build": "tsc",
-      "test": "jest"
-    }
+### 1. System Requirements
+
+- ✔️ **Node.js**: 18.x or higher
+- ✔️ **Yarn**: 1.22.22 or higher (use `yarn --version` to check)
+- ✔️ **Git**: Initialized repository with remote configured
+
+### 2. Installation
+
+```bash
+# Check Node.js version
+node --version  # Should be >= 18.0.0
+
+# Install/Update Yarn globally
+npm install -g yarn@1.22.22
+
+# Verify Yarn
+yarn --version  # Should be >= 1.22.22
+
+# Install project dependencies
+yarn install
+```
+
+### 3. Package.json Scripts
+
+Your `package.json` must include these scripts:
+
+```json
+{
+  "scripts": {
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
+    "build": "tsc",
+    "test": "jest",
+    "fix": "eslint . --ext .ts,.tsx --fix && prettier --write ."
   }
-  ```
-- ✔️ Configuration files:
-  - `.eslintrc.json` - Linting rules
-  - `.prettierrc` - Code formatting
-  - `tsconfig.json` - TypeScript settings
-  - `jest.config.js` - Test setup with 90%+ coverage threshold
+}
+```
 
-**Jest coverage example:**
+### 4. DevDependencies
+
+Ensure your `package.json` includes these required packages:
+
+```json
+{
+  "devDependencies": {
+    "@types/jest": "^29.5.13",
+    "@types/react": "^19.2.0",
+    "@types/react-test-renderer": "^19.1.0",
+    "eslint": "^8.19.0",
+    "eslint-plugin-prettier": "^5.5.5",
+    "jest": "^29.6.3",
+    "prettier": "^2.8.8",
+    "ts-jest": "^29.1.5",
+    "typescript": "^5.8.3"
+  }
+}
+```
+
+**Important:** Always run `yarn install` after updating `package.json` to ensure all dependencies are installed.
+
+### 5. Configuration Files
+
+Your project must have these configuration files:
+
+- ✔️ `.eslintrc.json` - ESLint rules for code quality
+- ✔️ `.prettierrc` - Prettier formatting rules
+- ✔️ `tsconfig.json` - TypeScript compiler settings
+- ✔️ `jest.config.js` - Jest test configuration
+
+### 6. Jest Coverage Configuration
+
+Your `jest.config.js` should include coverage thresholds (minimum 70% recommended for CI):
 
 ```javascript
 // jest.config.js
 module.exports = {
+  preset: 'react-native',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  testEnvironment: 'node',
+  testMatch: ['**/__tests__/**/*.{ts,tsx}', '**/*.{test,spec}.{ts,tsx}'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  transform: {
+    '^.+\\.(ts|tsx)$': ['ts-jest', {
+      tsconfig: {
+        jsx: 'react',
+        esModuleInterop: true,
+        allowSyntheticDefaultImports: true,
+      },
+    }],
+  },
+  collectCoverageFrom: [
+    'src/**/*.{ts,tsx}',
+    '!src/**/*.d.ts',
+    '!src/index.ts',
+  ],
   coverageThreshold: {
     global: {
-      branches: 90,
-      functions: 90,
-      lines: 90,
-      statements: 90,
+      branches: 70,
+      functions: 70,
+      lines: 70,
+      statements: 70,
     },
   },
 };
 ```
+
+### 7. Engine Requirements
+
+Set minimum versions in `package.json`:
+
+```json
+{
+  "engines": {
+    "node": ">= 18.0.0",
+    "yarn": ">= 1.22.0"
+  }
+}
+```
+
+### 8. Git Attributes for Line Endings
+
+Create a `.gitattributes` file in your project root to prevent line ending conflicts between Windows (CRLF) and Linux/Mac (LF):
+
+```
+# Auto detect text files and normalize line endings to LF
+* text=auto eol=lf
+
+# Source code
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+
+# Config files
+.eslintrc text eol=lf
+.prettierrc text eol=lf
+tsconfig.json text eol=lf
+jest.config.js text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+```
+
+**Why this matters:** CI runs on Linux (LF line endings), but Windows uses CRLF. Without `.gitattributes`, Prettier will format files differently in CI than locally, causing unexpected failures.
 
 ---
 
@@ -245,11 +508,14 @@ jobs:
 
 ### Step 1: Prerequisites
 
-Ensure the target project has:
+Ensure the target project has all requirements from the [Prerequisites](#-prerequisites) section:
 
-- Yarn workspaces (for monorepos)
-- Same script structure in `package.json`
-- ESLint, Prettier, TypeScript configs
+- ✔️ System requirements (Node.js 18+, Yarn 1.22.22+)
+- ✔️ All required scripts in `package.json`
+- ✔️ All required devDependencies installed
+- ✔️ Configuration files: `.eslintrc.json`, `.prettierrc`, `tsconfig.json`, `jest.config.js`
+- ✔️ Engine requirements set in `package.json`
+- ✔️ Yarn workspaces configured (for monorepos only)
 
 ### Step 2: Copy Workflows
 
@@ -288,16 +554,32 @@ jobs:
     uses: ./.github/workflows/checks-low.yml
 ```
 
-### Step 4: Customize Scripts
+### Step 4: Install Dependencies
 
-Update your `package.json` if commands differ:
+Run installation to ensure all required packages are present:
+
+```bash
+cd your-project
+yarn install
+
+# Verify all tools work
+yarn lint --version     # Should show ESLint version
+yarn format --check     # Should check formatting
+yarn build              # Should compile TypeScript
+yarn test               # Should run Jest tests
+```
+
+### Step 5: Customize Scripts (Optional)
+
+If your commands differ from standard setup, update your `package.json` scripts:
 
 ```json
 {
   "scripts": {
-    "lint": "eslint packages/*/src --ext .ts,.tsx",
-    "format": "prettier --write '**/*.{ts,tsx,json,md}'",
-    "build": "yarn workspaces run build",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
+    "build": "tsc",
+    "test": "jest --coverage"
     "test": "yarn workspaces run test"
   }
 }
