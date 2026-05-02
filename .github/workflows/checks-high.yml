@@ -1,7 +1,6 @@
 name: High CI
 
 on:
-  pull_request:
   workflow_call:
     inputs:
       runs-on:
