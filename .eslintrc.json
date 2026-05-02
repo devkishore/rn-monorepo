@@ -21,12 +21,7 @@
     "plugin:react-native/all",
     "prettier"
   ],
-  "plugins": [
-    "@typescript-eslint",
-    "react",
-    "react-native",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "react", "react-native", "prettier"],
   "rules": {
     "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",
@@ -43,10 +38,7 @@
     "no-console": [
       "warn",
       {
-        "allow": [
-          "warn",
-          "error"
-        ]
+        "allow": ["warn", "error"]
       }
     ]
   },
@@ -55,10 +47,5 @@
       "version": "detect"
     }
   },
-  "ignorePatterns": [
-    "node_modules",
-    "dist",
-    "build",
-    ".yarn"
-  ]
+  "ignorePatterns": ["node_modules", "dist", "build", ".yarn"]
 }

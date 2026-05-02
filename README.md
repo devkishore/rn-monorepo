@@ -23,8 +23,9 @@ frontend/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js >= 18.0.0
-- Yarn >= 4.0.0
+- Yarn >= 1.22.0
 
 ### Installation
 
@@ -43,42 +44,118 @@ yarn dev
 yarn build
 
 # Clean all builds
-yarn cleancommon package
-yarn dev
+yarn clean
+```
 
-# Build common package
+## 🧹 Code Quality & Testing
+
+### Linting
+
+```bash
+# Check for linting issues
+yarn lint
+
+# Auto-fix linting issues
+yarn lint:fix
+```
+
+### Testing
+
+```bash
+# Run tests in all workspaces
+yarn test
+
+# Run tests in specific workspace
+yarn workspace comify run test
+```
+
+### Building
+
+```bash
+# Build all packages
 yarn build
 
-# Clean builds
-yarn clean button component with primary/secondary variants
-- **Helpers** - Utility functions (formatString, getInitials, delay)
-- **Types** - Common TypeScript types (User, AppConfig)
+# Build specific package
+yarn workspace common run build
+```
+
+## ✅ Continuous Integration
+
+This project uses GitHub Actions for automated code quality checks and testing.
+
+### Workflow: CI Pipeline
+
+The workflow automatically runs on:
+
+- **Push** to `main` or `develop` branches
+- **Pull requests** to `main` or `develop` branches
+
+#### Jobs:
+
+1. **Setup** - Determines Node.js versions to test
+2. **Lint** - Runs ESLint on all TypeScript/TSX files
+3. **Build & Test** - Compiles code and runs unit tests
+
+#### Features:
+
+- ✅ Parallel job execution for speed
+- ✅ Automatic code formatting with Prettier
+- ✅ TypeScript compilation check
+- ✅ Jest unit test execution
+- ✅ Configurable Node.js versions (default: 20.x, optional: 18.x + 20.x)
+- ✅ Native Yarn dependency caching
+
+#### Configuration:
+
+- Lint rules: [.eslintrc.json](.eslintrc.json)
+- Code formatting: [.prettierrc](.prettierrc)
+- Workflow definition: [.github/workflows/ci.yml](.github/workflows/ci.yml)
+
+### Using as a Reusable Workflow
+
+This workflow can be used in other projects:
+
+```yaml
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-and-test:
+    uses: your-org/rn-monorepo/.github/workflows/ci.yml@main
+```
+
+See [.github/WORKFLOW_USAGE.md](.github/WORKFLOW_USAGE.md) for detailed documentation.
+
+## � Packages
+
+### common
+
+Shared components, utilities, and types for React Native applications.
+
+**Contents:**
+
+- **Components** - Reusable UI components (Button, etc.)
+- **Utilities** - Helper functions and common logic
+- **Types** - Shared TypeScript type definitions
 
 ### comify
+
 React Native application demonstrating usage of the common package.
 
 ## 🔗 Monorepo Benefits
 
 - **Shared Dependencies** - Manage dependencies across multiple apps in one place
 - **Code Reusability** - Share components, utilities, and types across apps
-This package is consumed by separate React Native apps (like comify) as an external dependency
 - **Simplified Development** - Run all apps with a single command
+- **Consistent Code Quality** - Unified linting and formatting rules
 
-## 📝 Adding New Apps or Packages
-
-### Add a new app:
-```bash
-mkdir apps/new-app
-cp -r apps/comify/src apps/new-app/
-cp apps/comify/package.json apps/new-app/
-# Update package.json name
-```
-
-### Add a new package:
-```bash
-mkdir packages/new-package
-cp -r packages/common/src packages/new-package/
-cp packages/commoPackages
+## 📝 Adding New Packages
 
 To add a new shared package to the monorepo:
 
@@ -89,4 +166,4 @@ cp packages/common/package.json packages/new-package/
 # Update package.json name and description
 ```
 
-Then external apps can consume it via: `@rn-monorepo/new-package
+Then external apps can consume it via: `@rn-monorepo/new-package`

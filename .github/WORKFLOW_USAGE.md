@@ -5,6 +5,7 @@ This repository contains a reusable GitHub Actions workflow for Yarn-based monor
 ## Overview
 
 The workflow (`ci.yml`) performs:
+
 - Linting with ESLint
 - TypeScript compilation/build
 - Unit tests with Jest
@@ -14,6 +15,7 @@ The workflow (`ci.yml`) performs:
 ## Prerequisites
 
 Your project must have:
+
 - `yarn@4.0.0` configured as package manager
 - Same ESLint and Prettier configs as this repo
 - `.eslintrc.json` for linting
@@ -25,6 +27,7 @@ Your project must have:
 ### For Other Projects
 
 1. **Copy the config files to your repo:**
+
    ```bash
    # From this repo, copy these files:
    - .eslintrc.json
@@ -56,14 +59,15 @@ Your project must have:
    - Regular projects: Uses `yarn test`
 
 3. **Optional: Override auto-detection**
-   
+
    If you need a custom test command:
+
    ```yaml
    jobs:
      build-and-test:
        uses: your-org/rn-monorepo/.github/workflows/ci.yml@main
        with:
-         test-command: "yarn test:e2e"
+         test-command: 'yarn test:e2e'
    ```
 
 ## Configuration
@@ -74,8 +78,8 @@ The reusable workflow automatically detects your project structure:
 - **Regular projects:** Automatically uses `yarn test`
 - **Custom:** Pass `test-command` input to override auto-detection
 
-| Input | Description | Default |
-|-------|-------------|---------|
+| Input          | Description                         | Default                         |
+| -------------- | ----------------------------------- | ------------------------------- |
 | `test-command` | Override auto-detected test command | Auto-detect based on workspaces |
 
 ## What Gets Checked
@@ -84,16 +88,18 @@ The reusable workflow automatically detects your project structure:
 ✅ Linting with ESLint  
 ✅ TypeScript compilation  
 ✅ Unit tests execution  
-✅ Multiple Node versions  
+✅ Multiple Node versions
 
 ## Troubleshooting
 
 ### Workflow not found error
+
 - Ensure the workflow file is on the `main` branch
 - Check organization name is correct
 - Wait a few minutes for GitHub to index the workflow
 
 ### Lint/Build/Test failures
+
 - Ensure your project has same config files
 - Run `yarn lint`, `yarn build`, `yarn test` locally first
 - Check ESLint rules in `.eslintrc.json`
@@ -101,6 +107,7 @@ The reusable workflow automatically detects your project structure:
 ## Maintenance
 
 To update the shared workflow:
+
 1. Modify `.github/workflows/ci.yml` in this repo
 2. Tag a new release
 3. Other repos can update by changing the ref: `@main` → `@v1.0.0`
