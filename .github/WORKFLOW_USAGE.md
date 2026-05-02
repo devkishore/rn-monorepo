@@ -47,7 +47,7 @@ Your project must meet these requirements before using workflows:
 
 #### 1. System Requirements
 
-- ✔️ **Node.js**: 18.x or higher
+- ✔️ **Node.js**: 20.x or higher
 - ✔️ **Yarn**: 1.22.22 or higher (use `yarn --version` to check)
 - ✔️ **Git**: Initialized repository with remote configured
 
@@ -55,7 +55,7 @@ Your project must meet these requirements before using workflows:
 
 ```bash
 # Check Node.js version
-node --version  # Should be >= 18.0.0
+node --version  # Should be >= 20.0.0
 
 # Install/Update Yarn globally
 npm install -g yarn@1.22.22
@@ -112,7 +112,7 @@ Set minimum versions in `package.json`:
 ```json
 {
   "engines": {
-    "node": ">= 18.0.0",
+    "node": ">= 20.0.0",
     "yarn": ">= 1.22.0"
   }
 }
@@ -272,7 +272,7 @@ Before using workflows, ensure your project meets all these requirements:
 
 ### 1. System Requirements
 
-- ✔️ **Node.js**: 18.x or higher
+- ✔️ **Node.js**: 20.x or higher
 - ✔️ **Yarn**: 1.22.22 or higher (use `yarn --version` to check)
 - ✔️ **Git**: Initialized repository with remote configured
 
@@ -280,7 +280,7 @@ Before using workflows, ensure your project meets all these requirements:
 
 ```bash
 # Check Node.js version
-node --version  # Should be >= 18.0.0
+node --version  # Should be >= 20.0.0
 
 # Install/Update Yarn globally
 npm install -g yarn@1.22.22
@@ -383,7 +383,7 @@ Set minimum versions in `package.json`:
 ```json
 {
   "engines": {
-    "node": ">= 18.0.0",
+    "node": ">= 20.0.0",
     "yarn": ">= 1.22.0"
   }
 }
@@ -510,7 +510,7 @@ jobs:
 
 Ensure the target project has all requirements from the [Prerequisites](#-prerequisites) section:
 
-- ✔️ System requirements (Node.js 18+, Yarn 1.22.22+)
+- ✔️ System requirements (Node.js 20+, Yarn 1.22.22+)
 - ✔️ All required scripts in `package.json`
 - ✔️ All required devDependencies installed
 - ✔️ Configuration files: `.eslintrc.json`, `.prettierrc`, `tsconfig.json`, `jest.config.js`
