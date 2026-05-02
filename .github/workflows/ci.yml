@@ -89,7 +89,7 @@ jobs:
           if [ -n "${{ inputs.test-command }}" ]; then
             echo "command=${{ inputs.test-command }}" >> $GITHUB_OUTPUT
           elif [ -f "package.json" ] && grep -q '"workspaces"' package.json; then
-            echo "command=yarn workspaces foreach -pt run test" >> $GITHUB_OUTPUT
+            echo "command=yarn workspaces run test" >> $GITHUB_OUTPUT
           else
             echo "command=yarn test" >> $GITHUB_OUTPUT
           fi
