@@ -34,7 +34,12 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Type Check (TypeScript - CRITICAL)
-        run: yarn workspaces run tsc --noEmit
+        run: |
+          if grep -q '"workspaces"' package.json; then
+            yarn workspaces run tsc --noEmit
+          else
+            yarn tsc --noEmit
+          fi
 
   lint:
     name: 'ESLint Code Quality'
