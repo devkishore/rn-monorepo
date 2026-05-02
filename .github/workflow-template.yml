@@ -1,0 +1,26 @@
+# Template for other projects to call the shared CI workflow
+# 
+# Instructions:
+# 1. Copy this file to your repo's .github/workflows/ directory
+# 2. Rename it to ci.yml
+# 3. Replace "your-org" with your GitHub organization/username
+# 4. Replace "rn-monorepo" with the name of this shared workflows repo
+# 5. The workflow auto-detects monorepo structures and runs appropriate tests:
+#    - For monorepos with workspaces: runs workspace-specific test command
+#    - For regular projects: runs yarn test
+#    - To override: set test-command input
+
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-and-test:
+    uses: your-org/rn-monorepo/.github/workflows/ci.yml@main
+    # Optional: Override auto-detection with custom test command
+    # with:
+    #   test-command: "yarn test:custom"

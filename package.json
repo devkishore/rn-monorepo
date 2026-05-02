@@ -7,13 +7,28 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "yarn workspaces foreach -pt run dev",
-    "build": "yarn workspaces foreach -pt run build",
-    "clean": "yarn workspaces foreach -pt run clean"
+    "dev": "yarn workspaces run dev",
+    "build": "yarn workspaces run build",
+    "clean": "yarn workspaces run clean",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "fix": "yarn lint:fix && yarn format",
+    "format": "prettier --write '**/*.{ts,tsx,json,md}'",
+    "test": "yarn workspaces run test"
   },
-  "packageManager": "yarn@4.0.0",
+  "packageManager": "yarn@1.22.22",
   "engines": {
     "node": ">=18.0.0",
-    "yarn": ">=4.0.0"
+    "yarn": ">=1.22.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-native": "^4.1.0",
+    "prettier": "^3.0.0"
   }
 }

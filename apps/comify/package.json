@@ -10,7 +10,9 @@
     "dev": "react-native start",
     "build": "tsc",
     "clean": "rm -rf dist",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix"
   },
   "dependencies": {
     "@rn-monorepo/common": "workspace:*",
