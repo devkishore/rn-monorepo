@@ -2,9 +2,7 @@ name: High CI
 
 on:
   push:
-    branches: ['**']
   pull_request:
-    branches: ['**']
   workflow_call:
     inputs:
       runs-on:
@@ -19,7 +17,7 @@ env:
 jobs:
   typecheck:
     name: 'TypeScript Type Checking'
-    runs-on: ${{ inputs.runs-on }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -41,7 +39,7 @@ jobs:
 
   lint:
     name: 'ESLint Code Quality'
-    runs-on: ${{ inputs.runs-on }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -63,7 +61,7 @@ jobs:
 
   format:
     name: 'Prettier Code Formatting'
-    runs-on: ${{ inputs.runs-on }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -85,7 +83,7 @@ jobs:
 
   build:
     name: 'Build & Compile'
-    runs-on: ${{ inputs.runs-on }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -107,7 +105,7 @@ jobs:
 
   test:
     name: 'Unit Tests'
-    runs-on: ${{ inputs.runs-on }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -129,7 +127,7 @@ jobs:
 
   security:
     name: 'Security Audit'
-    runs-on: ${{ inputs.runs-on }}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
