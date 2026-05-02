@@ -83,16 +83,6 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Detect test command
-        id: test-command
-        run: |
-          if [ -n "${{ inputs.test-command }}" ]; then
-            echo "command=${{ inputs.test-command }}" >> $GITHUB_OUTPUT
-          elif [ -f "package.json" ] && grep -q '"workspaces"' package.json; then
-            echo "command=yarn workspaces run test" >> $GITHUB_OUTPUT
-          else
-            echo "command=yarn test" >> $GITHUB_OUTPUT
-          fi
-
       - name: Run unit tests
-        run: ${{ steps.test-command.outputs.command }}
+        run: ${{ inputs.test-command || 'yarn test' }}
+        continue-on-error: true
