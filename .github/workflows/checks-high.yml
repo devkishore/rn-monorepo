@@ -2,6 +2,10 @@ name: High CI
 
 on:
   workflow_call:
+    secrets:
+      PAT_TOKEN:
+        description: 'GitHub PAT token for accessing private repos'
+        required: false
 
 env:
   NODE_OPTIONS: --max-old-space-size=4096
@@ -13,6 +17,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js (20.x)
         uses: actions/setup-node@v4
@@ -40,6 +46,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js (20.x)
         uses: actions/setup-node@v4
@@ -62,6 +70,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js (20.x)
         uses: actions/setup-node@v4
@@ -84,6 +94,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js (20.x)
         uses: actions/setup-node@v4
@@ -106,6 +118,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js (20.x)
         uses: actions/setup-node@v4
@@ -130,6 +144,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js (20.x)
         uses: actions/setup-node@v4
