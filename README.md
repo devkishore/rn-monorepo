@@ -1,13 +1,19 @@
-# React Native Monorepo
+# RN Monorepo
 
-A monorepo structure for React Native projects using Yarn Workspaces.
+A React Native monorepo with shared packages and reusable utilities for building scalable mobile applications.
 
-## 📁 Project Structure
+## 🏗️ Architecture
 
 ```
-frontend/
+rn-monorepo/
+├── apps/
+│   └── comify/          # Example React Native application
 ├── packages/
-│   └── common/              # Shared components and utilities
+│   ├── common/          # Shared components, utilities, and theme
+│   ├── api/             # HTTP client and API utilities
+│   ├── hooks/           # Custom React hooks
+│   └── storage/         # Persistent storage utilities
+└── package.json         # Workspace configuration
 │       ├── src/
 │       │   ├── components/  # Reusable UI components
 │       │   ├── utils/       # Helper functions

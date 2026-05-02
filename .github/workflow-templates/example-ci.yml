@@ -1,0 +1,49 @@
+name: Example CI - How to Use Reusable Workflows
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly Sunday
+    - cron: '0 3 * * 0'  # Weekly Sunday for low priority
+
+jobs:
+  # OPTION 1: Use workflows from current repository
+  high-priority-checks:
+    name: High Priority Checks
+    uses: ./.github/workflows/checks-high-reusable.yml
+    with:
+      node-versions: '["20.x"]'
+      runs-on: 'ubuntu-latest'
+
+  medium-priority-checks:
+    name: Medium Priority Checks
+    needs: high-priority-checks
+    if: success() || github.event_name == 'schedule'
+    uses: ./.github/workflows/checks-medium-reusable.yml
+    with:
+      runs-on: 'ubuntu-latest'
+
+  low-priority-checks:
+    name: Low Priority Checks
+    needs: medium-priority-checks
+    if: always()
+    uses: ./.github/workflows/checks-low-reusable.yml
+    with:
+      runs-on: 'ubuntu-latest'
+
+  # OPTION 2: Use workflows from external repository (example)
+  # high-priority-external:
+  #   name: External High Priority Checks
+  #   uses: my-org/workflow-templates/.github/workflows/checks-high-reusable.yml@main
+  #   with:
+  #     node-versions: '["20.x"]'
+
+# OPTION 3: Multi-version testing
+# jobs:
+#   high-priority:
+#     uses: ./.github/workflows/checks-high-reusable.yml
+#     with:
+#       node-versions: '["16.x", "18.x", "20.x"]'

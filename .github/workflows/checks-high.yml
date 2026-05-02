@@ -1,0 +1,186 @@
+name: High CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+  workflow_call:
+    inputs:
+      node-versions:
+        description: 'Node versions to test (JSON array)'
+        required: false
+        type: string
+        default: '["20.x"]'
+      runs-on:
+        description: 'Runner OS'
+        required: false
+        type: string
+        default: 'ubuntu-latest'
+
+env:
+  NODE_OPTIONS: --max-old-space-size=4096
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ${{ inputs.runs-on }}
+    outputs:
+      node-versions: ${{ steps.set-versions.outputs.versions }}
+    steps:
+      - name: Set Node versions
+        id: set-versions
+        run: |
+          if [ -z "${{ inputs.node-versions }}" ]; then
+            echo "versions=['20.x']" >> $GITHUB_OUTPUT
+          else
+            echo "versions=${{ inputs.node-versions }}" >> $GITHUB_OUTPUT
+          fi
+
+  typecheck:
+    name: 'TypeScript Type Checking'
+    runs-on: ${{ inputs.runs-on }}
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (20.x)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+
+      - name: Install Yarn 1.22.22
+        run: npm install -g yarn@1.22.22
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Type Check (TypeScript - CRITICAL)
+        run: yarn workspaces run tsc --noEmit
+
+  lint:
+    name: 'ESLint Code Quality'
+    runs-on: ${{ inputs.runs-on }}
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (20.x)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+
+      - name: Install Yarn 1.22.22
+        run: npm install -g yarn@1.22.22
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run ESLint (Code Style - CRITICAL)
+        run: yarn lint
+
+  format:
+    name: 'Prettier Code Formatting'
+    runs-on: ${{ inputs.runs-on }}
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (20.x)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+
+      - name: Install Yarn 1.22.22
+        run: npm install -g yarn@1.22.22
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Check Formatting (Prettier - CRITICAL)
+        run: yarn format --check
+
+  build:
+    name: 'Build & Compile'
+    runs-on: ${{ inputs.runs-on }}
+    needs: setup
+    strategy:
+      matrix:
+        node-version: ${{ fromJson(needs.setup.outputs.node-versions) }}
+      fail-fast: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install Yarn 1.22.22
+        run: npm install -g yarn@1.22.22
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build TypeScript (CRITICAL)
+        run: yarn build
+
+  test:
+    name: 'Unit Tests'
+    runs-on: ${{ inputs.runs-on }}
+    needs: setup
+    strategy:
+      matrix:
+        node-version: ${{ fromJson(needs.setup.outputs.node-versions) }}
+      fail-fast: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'yarn'
+
+      - name: Install Yarn 1.22.22
+        run: npm install -g yarn@1.22.22
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run Unit Tests (CRITICAL)
+        run: yarn test
+
+  security:
+    name: 'Security Audit'
+    runs-on: ${{ inputs.runs-on }}
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js (20.x)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'yarn'
+
+      - name: Install Yarn 1.22.22
+        run: npm install -g yarn@1.22.22
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Security Audit (CRITICAL)
+        run: yarn audit --audit-level moderate
+        continue-on-error: true
