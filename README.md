@@ -119,7 +119,7 @@ The workflow automatically runs on:
 
 ### Using as a Reusable Workflow
 
-This workflow can be used in other projects:
+This workflow can be used in other projects **without copying**:
 
 ```yaml
 # .github/workflows/ci.yml
@@ -130,11 +130,24 @@ on:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
+  schedule:
+    - cron: '0 2 * * 0'
 
 jobs:
-  build-and-test:
-    uses: your-org/rn-monorepo/.github/workflows/ci.yml@main
+  high:
+    uses: devkishore/rn-monorepo/.github/workflows/checks-high.yml@main
+  
+  medium:
+    uses: devkishore/rn-monorepo/.github/workflows/checks-medium.yml@main
+  
+  low:
+    uses: devkishore/rn-monorepo/.github/workflows/checks-low.yml@main
 ```
+
+**Benefits:**
+- ✅ No need to copy workflows
+- ✅ Automatically stays in sync with updates
+- ✅ Single source of truth for CI/CD
 
 See [.github/WORKFLOW_USAGE.md](.github/WORKFLOW_USAGE.md) for detailed documentation.
 

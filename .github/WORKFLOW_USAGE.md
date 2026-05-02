@@ -156,16 +156,16 @@ jest.config.js text eol=lf
 Your project must have these configuration files:
 
 - ✔️ [`.eslintrc.json`](https://eslint.org/docs/latest/use/configure/) - ESLint rules for code quality  
-  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/.eslintrc.json))
+  ([Example](https://github.com/devkishore/rn-monorepo/blob/main/.eslintrc.json))
 
 - ✔️ [`.prettierrc`](https://prettier.io/docs/en/configuration.html) - Prettier formatting rules  
-  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/.prettierrc))
+  ([Example](https://github.com/devkishore/rn-monorepo/blob/main/.prettierrc))
 
 - ✔️ [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) - TypeScript compiler settings  
-  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/apps/comify/tsconfig.json))
+  ([Example](https://github.com/devkishore/rn-monorepo/blob/main/apps/comify/tsconfig.json))
 
 - ✔️ [`jest.config.js`](https://jestjs.io/docs/configuration) - Jest test configuration  
-  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/packages/api/jest.config.js))
+  ([Example](https://github.com/devkishore/rn-monorepo/blob/main/packages/api/jest.config.js))
 
 ---
 
@@ -183,15 +183,15 @@ on:
 jobs:
   high:
     if: github.event_name == 'pull_request'
-    uses: fooliscool/rn-monorepo/.github/workflows/checks-high.yml@main
+    uses: devkishore/rn-monorepo/.github/workflows/checks-high.yml@main
   
   medium:
     if: github.event_name == 'schedule'
-    uses: fooliscool/rn-monorepo/.github/workflows/checks-medium.yml@main
+    uses: devkishore/rn-monorepo/.github/workflows/checks-medium.yml@main
   
   low:
     if: github.event_name == 'schedule'
-    uses: fooliscool/rn-monorepo/.github/workflows/checks-low.yml@main
+    uses: devkishore/rn-monorepo/.github/workflows/checks-low.yml@main
 ```
 
 Then push:
