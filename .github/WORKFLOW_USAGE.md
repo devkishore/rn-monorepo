@@ -9,17 +9,21 @@ Complete documentation for automated quality checks in React Native projects.
 ## 🚀 Quick Start
 
 ### For this project
+
 Just push code - workflows run automatically! ✅
 
 ### For other projects
+
 **3 steps:**
 
 1. Copy workflow file:
+
 ```bash
 cp .github/workflows/checks-high.yml your-project/.github/workflows/
 ```
 
 2. Create `.github/workflows/ci.yml`:
+
 ```yaml
 name: CI
 on:
@@ -34,6 +38,7 @@ jobs:
 ```
 
 3. Push it:
+
 ```bash
 git add .github/workflows/
 git commit -m "ci: add checks"
@@ -46,13 +51,13 @@ git push
 
 Every push/PR triggers these checks:
 
-| Check | What | Pass/Fail |
-|-------|------|-----------|
-| 🔍 **Lint** | ESLint code quality | ✅ Required |
-| 📝 **Format** | Prettier code style | ✅ Required |
-| 🏗️ **Build** | TypeScript compilation | ✅ Required |
-| ✅ **Tests** | Jest (90% coverage min) | ✅ Required |
-| 🔐 **Security** | Dependency audit | ⚠️ Warning |
+| Check           | What                    | Pass/Fail   |
+| --------------- | ----------------------- | ----------- |
+| 🔍 **Lint**     | ESLint code quality     | ✅ Required |
+| 📝 **Format**   | Prettier code style     | ✅ Required |
+| 🏗️ **Build**    | TypeScript compilation  | ✅ Required |
+| ✅ **Tests**    | Jest (90% coverage min) | ✅ Required |
+| 🔐 **Security** | Dependency audit        | ⚠️ Warning  |
 
 **Execution time:** ~15-20 minutes on first run, ~5-10 min cached
 
@@ -82,6 +87,7 @@ Before using workflows, ensure you have:
   - `jest.config.js` - Test setup with 90%+ coverage threshold
 
 **Jest coverage example:**
+
 ```javascript
 // jest.config.js
 module.exports = {
@@ -172,7 +178,9 @@ jobs:
 ## 🔄 Migrate to Other Projects
 
 ### Step 1: Prerequisites
+
 Ensure the target project has:
+
 - Yarn workspaces (for monorepos)
 - Same script structure in `package.json`
 - ESLint, Prettier, TypeScript configs
@@ -201,7 +209,7 @@ on:
   pull_request:
     branches: [main, develop]
   schedule:
-    - cron: '0 2 * * 0'  # Weekly checks
+    - cron: '0 2 * * 0' # Weekly checks
 
 jobs:
   high-priority:
@@ -270,6 +278,7 @@ Then check GitHub Actions tab for results.
    - ✅ Select "Build & Compile"
 
 ### Result
+
 - Only code passing ALL checks can merge
 - Failed tests = blocked PR 🚫
 - Accidental mistakes prevented
@@ -277,6 +286,7 @@ Then check GitHub Actions tab for results.
 ### Optional: Require Manual Reviews
 
 Also enable:
+
 - ✅ "Require pull request reviews before merging"
 - ✅ "Require code reviews from code owners"
 
@@ -337,6 +347,7 @@ yarn tsc --noEmit
 **Cause:** File path or branch name wrong
 
 **Fix:**
+
 - Check file exists: `ls .github/workflows/checks-high.yml`
 - Check branch: Workflows must be on branch you're pushing to
 - Correct syntax: `uses: ./.github/workflows/checks-high.yml`
@@ -346,6 +357,7 @@ yarn tsc --noEmit
 **Cause:** No workflow triggered
 
 **Fix:**
+
 - Push to correct branch (main, develop, etc.)
 - Check `on:` trigger in CI file
 - Wait 30 seconds for GitHub to index
@@ -356,15 +368,16 @@ yarn tsc --noEmit
 
 ### Three-Tier Approach
 
-| Tier | Priority | Trigger | Purpose |
-|------|----------|---------|---------|
-| **High** | 🔴 Critical | Every push/PR | Block merges if fail |
-| **Medium** | 🟡 Info | Weekly | Monitor quality trend |
-| **Low** | 🟢 Optional | Weekly + manual | Deep analysis |
+| Tier       | Priority    | Trigger         | Purpose               |
+| ---------- | ----------- | --------------- | --------------------- |
+| **High**   | 🔴 Critical | Every push/PR   | Block merges if fail  |
+| **Medium** | 🟡 Info     | Weekly          | Monitor quality trend |
+| **Low**    | 🟢 Optional | Weekly + manual | Deep analysis         |
 
 ### Jobs in Each Tier
 
 **High Priority (Required):**
+
 - TypeScript type checking
 - ESLint linting
 - Prettier formatting
@@ -373,12 +386,14 @@ yarn tsc --noEmit
 - Security audit
 
 **Medium Priority (Informational):**
+
 - Coverage analysis
 - Dependency checks
 - Performance profiling
 - Documentation validation
 
 **Low Priority (Insights):**
+
 - E2E tests
 - Accessibility audit
 - Secrets scanning
@@ -418,21 +433,21 @@ After setup, your `.github/` should look like:
 ✅ **Write meaningful tests** - Not just line hits  
 ✅ **Review workflow logs** - Learn from failures  
 ✅ **Use branch protection** - Enforce quality gates  
-✅ **Cache dependencies** - Speed up CI runs  
+✅ **Cache dependencies** - Speed up CI runs
 
 ---
 
 ## 🆘 Common Issues
 
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| `Lint failed` | Code style violation | `yarn lint --fix` |
-| `Format failed` | Inconsistent formatting | `yarn format` |
-| `Build failed` | TypeScript errors | `yarn build` / check errors |
-| `Test failed` | Test assertion error | `yarn test` / debug locally |
-| `Coverage low` | Tests don't cover all code | Add tests (need 90%+) |
-| `Yarn not found` | Not installed or cached | Check Node setup in workflow |
-| `Module not found` | Dependencies missing | Run `yarn install` |
+| Issue              | Cause                      | Solution                     |
+| ------------------ | -------------------------- | ---------------------------- |
+| `Lint failed`      | Code style violation       | `yarn lint --fix`            |
+| `Format failed`    | Inconsistent formatting    | `yarn format`                |
+| `Build failed`     | TypeScript errors          | `yarn build` / check errors  |
+| `Test failed`      | Test assertion error       | `yarn test` / debug locally  |
+| `Coverage low`     | Tests don't cover all code | Add tests (need 90%+)        |
+| `Yarn not found`   | Not installed or cached    | Check Node setup in workflow |
+| `Module not found` | Dependencies missing       | Run `yarn install`           |
 
 ---
 

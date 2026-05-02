@@ -1,8 +1,6 @@
 /**
  * Tests for Button Component
  */
-
-import React from 'react';
 import { Button } from './Button';
 
 // Mock react-native modules
@@ -130,7 +128,8 @@ describe('Button Component', () => {
     });
 
     it('should handle very long title', () => {
-      const longTitle = 'This is a very long button title that should still render correctly even with multiple words and special cases';
+      const longTitle =
+        'This is a very long button title that should still render correctly even with multiple words and special cases';
       const button = Button({ title: longTitle, onPress: () => {} });
       expect(button).toBeTruthy();
     });
@@ -202,7 +201,7 @@ describe('Button Component', () => {
   describe('component creation', () => {
     it('should create multiple button instances', () => {
       const buttons = Array.from({ length: 5 }, (_, i) =>
-        Button({ title: `Button ${i}`, onPress: () => {} }),
+        Button({ title: `Button ${i}`, onPress: () => {} })
       );
       expect(buttons).toHaveLength(5);
       buttons.forEach((btn) => expect(btn).toBeTruthy());

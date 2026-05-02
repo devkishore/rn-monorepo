@@ -14,9 +14,12 @@ describe('useAsync', () => {
       const asyncFn = jest.fn().mockResolvedValue(mockData);
       const { result } = renderHook(() => useAsync(asyncFn, true));
 
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      }, { timeout: 5000 });
+      await waitFor(
+        () => {
+          expect(result.current.status).toBe('success');
+        },
+        { timeout: 5000 }
+      );
 
       expect(result.current.data).toEqual(mockData);
       expect(result.current.error).toBeNull();
@@ -88,7 +91,7 @@ describe('useAsync', () => {
       await expect(
         act(async () => {
           return result.current.execute();
-        }),
+        })
       ).rejects.toThrow('Failed');
     });
   });
@@ -106,9 +109,7 @@ describe('useAsync', () => {
     });
 
     it('should clear data between executions', async () => {
-      const asyncFn = jest.fn()
-        .mockResolvedValueOnce('data1')
-        .mockResolvedValueOnce('data2');
+      const asyncFn = jest.fn().mockResolvedValueOnce('data1').mockResolvedValueOnce('data2');
 
       const { result } = renderHook(() => useAsync(asyncFn, false));
 
@@ -142,7 +143,8 @@ describe('useAsync', () => {
     });
 
     it('should recover from error to success', async () => {
-      const asyncFn = jest.fn()
+      const asyncFn = jest
+        .fn()
         .mockRejectedValueOnce(new Error('First failed'))
         .mockResolvedValueOnce('Now succeeds');
 
@@ -232,4 +234,3 @@ describe('useAsync', () => {
     });
   });
 });
-
