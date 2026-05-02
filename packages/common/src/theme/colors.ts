@@ -14,6 +14,7 @@ export const COLORS = {
   darkGray: '#333333',
   mediumGray: '#666666',
   lightGray: '#F5F5F5',
+  test: '#asdsa',
 } as const;
 
 export type ColorKey = keyof typeof COLORS;
