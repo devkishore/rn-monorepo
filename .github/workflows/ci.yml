@@ -30,7 +30,12 @@ jobs:
     steps:
       - name: Set Node versions
         id: set-versions
-        run: echo "versions=${{ inputs.node-versions }}" >> $GITHUB_OUTPUT
+        run: |
+          if [ -z "${{ inputs.node-versions }}" ]; then
+            echo "versions=['20.x']" >> $GITHUB_OUTPUT
+          else
+            echo "versions=${{ inputs.node-versions }}" >> $GITHUB_OUTPUT
+          fi
 
   lint:
     name: Lint Code
