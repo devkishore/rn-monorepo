@@ -7,12 +7,14 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "yarn workspaces foreach -pt run dev",
-    "build": "yarn workspaces foreach -pt run build",
-    "clean": "yarn workspaces foreach -pt run clean",
+    "dev": "yarn workspaces run dev",
+    "build": "yarn workspaces run build",
+    "clean": "yarn workspaces run clean",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "test": "yarn workspaces foreach -pt run test"
+    "fix": "yarn lint:fix && yarn format",
+    "format": "prettier --write '**/*.{ts,tsx,json,md}'",
+    "test": "yarn workspaces run test"
   },
   "packageManager": "yarn@1.22.22",
   "engines": {
