@@ -8,18 +8,65 @@ Complete documentation for automated quality checks in React Native projects.
 
 ## 🚀 Quick Start
 
+### Unified Workflow System
+
+**One version, multiple uses:**
+- `checks-high.yml` - Runs on all PRs (all branches) & can be called from other projects
+- `checks-medium.yml` - Runs on schedule (main/develop only) & can be called from other projects
+- `checks-low.yml` - Runs on schedule (main/develop only) & can be called from other projects
+
 ### For this project
 
 Just push code - workflows run automatically! ✅
 
 ### For other projects
 
-**3 steps:**
+**Option A: Reference from this repo (Recommended - No copying)**
 
-1. Copy workflow file:
+Create `.github/workflows/ci.yml`:
+
+```yaml
+name: CI
+on:
+  pull_request:  # Run on PRs to any branch
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly Sunday 2 AM UTC
+
+jobs:
+  high:
+    if: github.event_name == 'pull_request'
+    uses: fooliscool/rn-monorepo/.github/workflows/checks-high.yml@main
+  
+  medium:
+    if: github.event_name == 'schedule'
+    uses: fooliscool/rn-monorepo/.github/workflows/checks-medium.yml@main
+  
+  low:
+    if: github.event_name == 'schedule'
+    uses: fooliscool/rn-monorepo/.github/workflows/checks-low.yml@main
+```
+
+Then push:
+```bash
+git add .github/workflows/ci.yml
+git commit -m "ci: add reusable workflows from rn-monorepo"
+git push
+```
+
+**How it works:**
+- ✅ On **PR**: Only HIGH CI runs (blocks merge if fails)
+- ✅ On **Schedule (Sunday 2 AM UTC)**: Only MEDIUM & LOW run (informational)
+
+**Benefits:** Always stays in sync - no need to update when workflows change!
+
+---
+
+**Option B: Copy workflows locally (If you need customization)**
+
+1. Copy workflow files:
 
 ```bash
-cp .github/workflows/checks-high.yml your-project/.github/workflows/
+cp .github/workflows/checks-{high,medium,low}.yml your-project/.github/workflows/
 ```
 
 2. Create `.github/workflows/ci.yml`:
@@ -27,14 +74,22 @@ cp .github/workflows/checks-high.yml your-project/.github/workflows/
 ```yaml
 name: CI
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+  pull_request:  # Run on PRs to any branch
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly Sunday 2 AM UTC
 
 jobs:
-  checks:
+  high:
+    if: github.event_name == 'pull_request'
     uses: ./.github/workflows/checks-high.yml
+  
+  medium:
+    if: github.event_name == 'schedule' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+    uses: ./.github/workflows/checks-medium.yml
+  
+  low:
+    if: github.event_name == 'schedule' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+    uses: ./.github/workflows/checks-low.yml
 ```
 
 3. Push it:
@@ -106,22 +161,33 @@ module.exports = {
 
 ## 💡 Using in Your Project
 
-### Basic Setup
+### Local Setup: Copy Workflows
 
-Just create `.github/workflows/ci.yml` and reference the workflow:
+If you want to customize or modify locally:
+
+1. Copy workflow files to your project
+2. Create `.github/workflows/ci.yml`:
 
 ```yaml
 name: CI
 
 on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
+  pull_request:  # Run on PRs to any branch
+  schedule:
+    - cron: '0 2 * * 0'  # Weekly Sunday 2 AM UTC
 
 jobs:
-  quality-checks:
+  high:
+    if: github.event_name == 'pull_request'
     uses: ./.github/workflows/checks-high.yml
+  
+  medium:
+    if: github.event_name == 'schedule'
+    uses: ./.github/workflows/checks-medium.yml
+  
+  low:
+    if: github.event_name == 'schedule'
+    uses: ./.github/workflows/checks-low.yml
 ```
 
 ### Multi-Version Testing
@@ -204,25 +270,21 @@ In your project, create `.github/workflows/ci.yml`:
 name: CI
 
 on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
+  pull_request:  # Run on PRs to any branch
   schedule:
-    - cron: '0 2 * * 0' # Weekly checks
+    - cron: '0 2 * * 0'  # Weekly Sunday 2 AM UTC
 
 jobs:
   high-priority:
+    if: github.event_name == 'pull_request'
     uses: ./.github/workflows/checks-high.yml
 
   medium-priority:
-    needs: high-priority
-    if: success() || github.event_name == 'schedule'
+    if: github.event_name == 'schedule' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
     uses: ./.github/workflows/checks-medium.yml
 
   low-priority:
-    needs: medium-priority
-    if: always()
+    if: github.event_name == 'schedule' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
     uses: ./.github/workflows/checks-low.yml
 ```
 
@@ -368,11 +430,11 @@ yarn tsc --noEmit
 
 ### Three-Tier Approach
 
-| Tier       | Priority    | Trigger         | Purpose               |
-| ---------- | ----------- | --------------- | --------------------- |
-| **High**   | 🔴 Critical | Every push/PR   | Block merges if fail  |
-| **Medium** | 🟡 Info     | Weekly          | Monitor quality trend |
-| **Low**    | 🟢 Optional | Weekly + manual | Deep analysis         |
+| Tier       | Priority    | Trigger                  | Purpose               |
+| ---------- | ----------- | ------------------------ | --------------------- |
+| **High**   | 🔴 Critical | Every PR (all branches)  | Block merges if fail  |
+| **Medium** | 🟡 Info     | Weekly (main/develop)    | Monitor quality trend |
+| **Low**    | 🟢 Optional | Weekly (main/develop)    | Deep analysis         |
 
 ### Jobs in Each Tier
 
