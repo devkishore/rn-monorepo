@@ -27,5 +27,13 @@ module.exports = {
     '!src/index.ts',
   ],
   coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
+  coverageThreshold: {
+    global: {
+      branches: 90,  // React hooks are complex; 90% is excellent
+      functions: 90,
+      lines: 90,
+      statements: 90,
+    },
+  },
   errorOnDeprecated: true,
 };

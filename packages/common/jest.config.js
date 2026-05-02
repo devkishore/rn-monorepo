@@ -36,10 +36,10 @@ module.exports = {
   coveragePathIgnorePatterns: ['/node_modules/', '/dist/', '/build/'],
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 80,
-      lines: 80,
-      statements: 80,
+      branches: 90,
+      functions: 90,
+      lines: 95,
+      statements: 95,
     },
   },
   errorOnDeprecated: true,
