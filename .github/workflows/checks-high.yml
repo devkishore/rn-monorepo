@@ -103,8 +103,8 @@ jobs:
         run: yarn build
 
   test:
-    name: 'Unit Tests'
-    runs-on: ubuntu-latest
+    needs: format
+    nuns-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
