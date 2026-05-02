@@ -121,8 +121,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Run Unit Tests (CRITICAL)
-        run: yarn test
+      - name: Run Unit Tests with 100% Coverage (CRITICAL)
+        run: yarn test -- --coverage
+        env:
+          CI: true
 
   security:
     name: 'Security Audit'
