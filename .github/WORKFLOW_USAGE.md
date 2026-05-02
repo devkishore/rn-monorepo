@@ -156,16 +156,16 @@ jest.config.js text eol=lf
 Your project must have these configuration files:
 
 - ✔️ [`.eslintrc.json`](https://eslint.org/docs/latest/use/configure/) - ESLint rules for code quality  
-  ([Example](https://github.com/fooliscool/rn-comify/blob/main/.eslintrc.json))
+  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/.eslintrc.json))
 
 - ✔️ [`.prettierrc`](https://prettier.io/docs/en/configuration.html) - Prettier formatting rules  
-  ([Example](https://github.com/fooliscool/rn-comify/blob/main/.prettierrc))
+  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/.prettierrc))
 
 - ✔️ [`tsconfig.json`](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) - TypeScript compiler settings  
-  ([Example](https://github.com/fooliscool/rn-comify/blob/main/tsconfig.json))
+  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/tsconfig.json))
 
 - ✔️ [`jest.config.js`](https://jestjs.io/docs/configuration) - Jest test configuration  
-  ([Example](https://github.com/fooliscool/rn-comify/blob/main/jest.config.js))
+  ([Example](https://github.com/fooliscool/rn-monorepo/blob/main/jest.config.js))
 
 ---
 
