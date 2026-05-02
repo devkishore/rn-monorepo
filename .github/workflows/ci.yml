@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_call:
+    inputs:
+      test-command:
+        description: "Command to run tests (leave empty for auto-detection based on monorepo structure)"
+        required: false
+        type: string
+        default: ""
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup Yarn
+        run: npm install -g yarn@4
+
+      - name: Cache Yarn dependencies
+        uses: actions/cache@v3
+        with:
+          path: .yarn/cache
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Build
+        run: yarn build
+
+      - name: Detect test command
+        id: test-command
+        run: |
+          if [ -n "${{ inputs.test-command }}" ]; then
+            echo "command=${{ inputs.test-command }}" >> $GITHUB_OUTPUT
+          elif [ -f "package.json" ] && grep -q '"workspaces"' package.json; then
+            echo "command=yarn workspaces foreach -pt run test" >> $GITHUB_OUTPUT
+          else
+            echo "command=yarn test" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run unit tests
+        run: ${{ steps.test-command.outputs.command }}

@@ -9,11 +9,24 @@
   "scripts": {
     "dev": "yarn workspaces foreach -pt run dev",
     "build": "yarn workspaces foreach -pt run build",
-    "clean": "yarn workspaces foreach -pt run clean"
+    "clean": "yarn workspaces foreach -pt run clean",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "test": "yarn workspaces foreach -pt run test"
   },
   "packageManager": "yarn@4.0.0",
   "engines": {
     "node": ">=18.0.0",
     "yarn": ">=4.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-native": "^4.1.0",
+    "prettier": "^3.0.0"
   }
 }
