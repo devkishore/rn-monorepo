@@ -15,7 +15,7 @@ describe('COLORS Theme Configuration', () => {
     });
 
     it('should have white color defined', () => {
-      expect(COLORS.white).toBe('#FFFFFF');
+      expect(COLORS.white).toBe('#FFF0FF');
     });
 
     it('should have black color defined', () => {
@@ -71,7 +71,7 @@ describe('COLORS Theme Configuration', () => {
     });
 
     it('should have white as a light color', () => {
-      expect(COLORS.white).toBe('#FFFFFF');
+      expect(COLORS.white).toBe('#FFF0FF');
     });
 
     it('should have black as a dark color', () => {
@@ -116,8 +116,16 @@ describe('COLORS Theme Configuration', () => {
     });
 
     it('should support theming with available colors', () => {
-      const colorKeys: ColorKey[] = ['primary', 'primaryLight', 'white', 'black', 'darkGray', 'mediumGray', 'lightGray'];
-      
+      const colorKeys: ColorKey[] = [
+        'primary',
+        'primaryLight',
+        'white',
+        'black',
+        'darkGray',
+        'mediumGray',
+        'lightGray',
+      ];
+
       colorKeys.forEach((key) => {
         expect(COLORS[key]).toBeDefined();
         expect(typeof COLORS[key]).toBe('string');

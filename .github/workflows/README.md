@@ -11,6 +11,7 @@ This directory contains GitHub Actions workflows organized by priority level. Ea
 **Purpose:** Critical checks that prevent production issues. These must pass before merging.
 
 **Jobs:**
+
 1. **Setup** - Initialize Node versions for matrix testing
 2. **TypeScript Type Checking** - Validate all type definitions
    - Command: `yarn workspaces run tsc --noEmit`
@@ -49,6 +50,7 @@ This directory contains GitHub Actions workflows organized by priority level. Ea
 **Purpose:** Important checks for code quality and maintainability. These should pass but aren't production blockers.
 
 **Jobs:**
+
 1. **Test Coverage Analysis** - Monitor test coverage metrics
    - Runs: `yarn test -- --coverage`
    - Generates coverage reports as artifacts
@@ -87,6 +89,7 @@ This directory contains GitHub Actions workflows organized by priority level. Ea
 **Purpose:** Optional insights and best practices. Run less frequently.
 
 **Jobs:**
+
 1. **E2E Tests** - End-to-end user workflow testing
    - Runs: `yarn test:e2e` (if configured)
    - Detects: Full user journey failures
@@ -116,7 +119,7 @@ This directory contains GitHub Actions workflows organized by priority level. Ea
    - Non-blocking: Code cleanup suggestion
 
 6. **Deprecated APIs Check** - Scan for old React patterns
-   - Finds: componentWillMount, UNSAFE_ methods
+   - Finds: componentWillMount, UNSAFE\_ methods
    - Detects: Deprecated React/RN APIs
    - Non-blocking: Migration guide
 
@@ -255,7 +258,9 @@ You can add status badges to your README:
 ## 🔧 Customization
 
 ### Modify High Priority Schedule
+
 Edit `.github/workflows/checks-high.yml`:
+
 ```yaml
 on:
   push:
@@ -265,7 +270,9 @@ on:
 ```
 
 ### Modify Medium Priority Schedule
+
 Edit `.github/workflows/checks-medium.yml`:
+
 ```yaml
 on:
   schedule:
@@ -273,7 +280,9 @@ on:
 ```
 
 ### Modify Low Priority Schedule
+
 Edit `.github/workflows/checks-low.yml`:
+
 ```yaml
 on:
   schedule:
@@ -287,37 +296,37 @@ on:
 
 ### High Priority Checks
 
-| Check | Purpose | Failure Impact | Fix |
-|-------|---------|-----------------|-----|
-| TypeScript | Type safety | Hard error | Fix type errors |
-| ESLint | Code quality | Blocks merge | `yarn lint:fix` |
-| Prettier | Formatting | Blocks merge | `yarn format` |
-| Build | Compilation | Hard error | Fix build errors |
-| Tests | Functionality | Blocks merge | Update tests or code |
-| Security | Vulnerability | Warning only | Update packages |
+| Check      | Purpose       | Failure Impact | Fix                  |
+| ---------- | ------------- | -------------- | -------------------- |
+| TypeScript | Type safety   | Hard error     | Fix type errors      |
+| ESLint     | Code quality  | Blocks merge   | `yarn lint:fix`      |
+| Prettier   | Formatting    | Blocks merge   | `yarn format`        |
+| Build      | Compilation   | Hard error     | Fix build errors     |
+| Tests      | Functionality | Blocks merge   | Update tests or code |
+| Security   | Vulnerability | Warning only   | Update packages      |
 
 ### Medium Priority Checks
 
-| Check | Purpose | Frequency | Warning |
-|-------|---------|-----------|---------|
-| Coverage | Code quality | Weekly | Low coverage |
-| Dependencies | Package health | Weekly | Outdated packages |
-| Integration | Component interaction | Weekly | Broken integration |
-| Performance | Bundle size | Weekly | Size increase |
-| Documentation | Completeness | Weekly | Missing docs |
+| Check         | Purpose               | Frequency | Warning            |
+| ------------- | --------------------- | --------- | ------------------ |
+| Coverage      | Code quality          | Weekly    | Low coverage       |
+| Dependencies  | Package health        | Weekly    | Outdated packages  |
+| Integration   | Component interaction | Weekly    | Broken integration |
+| Performance   | Bundle size           | Weekly    | Size increase      |
+| Documentation | Completeness          | Weekly    | Missing docs       |
 
 ### Low Priority Checks
 
-| Check | Purpose | Frequency | Action |
-|-------|---------|-----------|--------|
-| E2E Tests | User workflows | Weekly | Investigate failures |
-| Accessibility | A11y compliance | Weekly | Review recommendations |
-| Secrets | Security | Weekly | Remove exposed secrets |
-| Bundle Size | Performance | Weekly | Optimize if needed |
-| Unused Deps | Cleanup | Weekly | Remove unused packages |
-| Deprecated APIs | Modernization | Weekly | Update patterns |
-| Licenses | Compliance | Weekly | Review licenses |
-| Metrics | Analytics | Weekly | Track trends |
+| Check           | Purpose         | Frequency | Action                 |
+| --------------- | --------------- | --------- | ---------------------- |
+| E2E Tests       | User workflows  | Weekly    | Investigate failures   |
+| Accessibility   | A11y compliance | Weekly    | Review recommendations |
+| Secrets         | Security        | Weekly    | Remove exposed secrets |
+| Bundle Size     | Performance     | Weekly    | Optimize if needed     |
+| Unused Deps     | Cleanup         | Weekly    | Remove unused packages |
+| Deprecated APIs | Modernization   | Weekly    | Update patterns        |
+| Licenses        | Compliance      | Weekly    | Review licenses        |
+| Metrics         | Analytics       | Weekly    | Track trends           |
 
 ---
 
@@ -326,21 +335,25 @@ on:
 ### High Priority Workflow Failing
 
 1. **TypeScript errors**
+
    ```bash
    yarn workspaces run tsc --noEmit
    ```
 
 2. **ESLint errors**
+
    ```bash
    yarn lint:fix
    ```
 
 3. **Format errors**
+
    ```bash
    yarn format
    ```
 
 4. **Build errors**
+
    ```bash
    yarn build
    ```
@@ -390,6 +403,7 @@ Edit workflow YAML and add `continue-on-error: true` to the step.
 ## 📞 Support
 
 For workflow issues:
+
 1. Check GitHub Actions logs
 2. Review error messages carefully
 3. Run local commands to reproduce

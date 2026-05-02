@@ -9,7 +9,7 @@ export const COLORS = {
   primaryLight: '#E5E5EA',
 
   // Neutral Colors
-  white: '#FFFFFF',
+  white: '#FFF0FF',
   black: '#000000',
   darkGray: '#333333',
   mediumGray: '#666666',
