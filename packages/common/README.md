@@ -2,7 +2,7 @@
 
 Shared components, utilities, and design tokens for React Native applications.
 
-## 📦 Installation
+## 📦  Installation
 
 ```bash
 yarn add @rn-monorepo/common
