@@ -16,6 +16,7 @@ env:
 
 jobs:
   coverage:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Test Coverage Analysis'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -60,6 +61,7 @@ jobs:
             })
 
   dependency-check:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Check Dependencies'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -85,6 +87,7 @@ jobs:
         run: yarn list --pattern "^" | head -20 || true
 
   integration-tests:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Integration Tests'
     runs-on: ubuntu-latest
     steps:
@@ -108,6 +111,7 @@ jobs:
         continue-on-error: true
 
   performance:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Performance Check'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -133,6 +137,7 @@ jobs:
           du -sh packages/*/dist
 
   documentation:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Documentation Check'
     runs-on: ${{ inputs.runs-on }}
     steps:

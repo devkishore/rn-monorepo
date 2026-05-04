@@ -17,6 +17,7 @@ env:
 
 jobs:
   e2e-tests:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'E2E Tests'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -40,6 +41,7 @@ jobs:
         continue-on-error: true
 
   accessibility:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Accessibility Audit'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -61,6 +63,7 @@ jobs:
           echo "- Verify color contrast ratios"
 
   secrets-scan:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Secrets Detection'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -76,6 +79,7 @@ jobs:
           extra_args: --debug --only-verified
 
   bundle-analysis:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Bundle Size Analysis'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -105,6 +109,7 @@ jobs:
           done
 
   unused-dependencies:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Unused Dependencies'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -128,6 +133,7 @@ jobs:
         continue-on-error: true
 
   deprecated-apis:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Deprecated APIs Check'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -150,6 +156,7 @@ jobs:
           echo "Check completed"
 
   license-check:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'License Compliance'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -173,6 +180,7 @@ jobs:
         continue-on-error: true
 
   code-metrics:
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call'
     name: 'Code Metrics'
     runs-on: ${{ inputs.runs-on }}
     steps:
@@ -194,7 +202,7 @@ jobs:
   health-report:
     name: 'Project Health Report'
     runs-on: ${{ inputs.runs-on }}
-    if: always()
+    if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop' || github.event_name == 'workflow_call') && always()
     steps:
       - name: Generate Health Report
         run: |
