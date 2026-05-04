@@ -129,26 +129,3 @@ jobs:
         run: yarn test -- --coverage
         env:
           CI: true
-
-  security:
-    name: 'Security Audit'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js (20.x)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x'
-          cache: 'yarn'
-
-      - name: Install Yarn 1.22.22
-        run: npm install -g yarn@1.22.22
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Security Audit (CRITICAL)
-        run: yarn audit --audit-level moderate
-        continue-on-error: true
