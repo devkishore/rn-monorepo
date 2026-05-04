@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1777712770285" clover="3.2.0">
-  <project timestamp="1777712770286" name="All files">
+<coverage generated="1777715638137" clover="3.2.0">
+  <project timestamp="1777715638137" name="All files">
     <metrics statements="24" coveredstatements="24" conditionals="5" coveredconditionals="5" methods="7" coveredmethods="7" elements="36" coveredelements="36" complexity="0" loc="24" ncloc="24" packages="1" files="2" classes="2"/>
     <file name="useAsync.ts" path="C:\projects\frontend\rn-monorepo\packages\hooks\src\useAsync.ts">
       <metrics statements="16" coveredstatements="16" conditionals="4" coveredconditionals="4" methods="3" coveredmethods="3"/>

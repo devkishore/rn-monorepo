@@ -8,10 +8,13 @@
     "build": "tsc",
     "clean": "rm -rf dist",
     "dev": "tsc --watch",
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.21.0"
