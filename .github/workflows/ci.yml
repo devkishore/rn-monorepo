@@ -7,6 +7,17 @@ on:
       - main
       - develop
 
+permissions:
+  contents: read
+  actions: read
+  checks: write
+  pull-requests: write
+
 jobs:
   call-workflow:
     uses: ./.github/workflows/checks-high.yml
+    permissions:
+      contents: read
+      actions: read
+      checks: write
+      pull-requests: write
